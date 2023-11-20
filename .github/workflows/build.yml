@@ -7,7 +7,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Install Deps
-        run: brew install automake cmake libtool protobuf-c libspatialite pkg-config sqlite3 jq curl wget czmq lz4 spatialite-tools unzip luajit
+        run: brew install automake cmake libtool protobuf-c libspatialite pkg-config sqlite3 jq curl wget czmq lz4 spatialite-tools unzip luajit conan
       - name: Clone
         run: git clone --recurse-submodules https://github.com/valhalla/valhalla.git
       - name: Configure
@@ -21,6 +21,13 @@ jobs:
         with:
           name: ValhallaMac
           path: build/release/*
+
+  build-windows:
+    name: Build Tools for Windows
+    runs-on: windows-latest
+    steps:
+       - name: Install Deps
+       - run: vcpkg.exe
       
         
         
