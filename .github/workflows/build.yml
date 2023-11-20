@@ -1,0 +1,26 @@
+name: Build-Exe
+on: [push, workflow_dispatch]
+
+jobs:
+  build-mac:
+    name: Build Tools for macOS
+    runs-on: macos-latest
+    steps:
+      - name: Install Deps
+        run: brew install automake cmake libtool protobuf-c libspatialite pkg-config sqlite3 jq curl wget czmq lz4 spatialite-tools unzip luajit
+      - name: Clone
+        run: git clone --recurse-submodules https://github.com/valhalla/valhalla.git
+      - name: Configure
+        run: cmake -B build -DCMAKE_BUILD_TYPE=Release
+      - name: Build
+        run: cmake --build build --target install --config release
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ValhallaMac
+          path: build/release/*
+      
+        
+        
+
+
