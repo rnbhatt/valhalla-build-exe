@@ -11,9 +11,11 @@ jobs:
       - name: Clone
         run: git clone --recurse-submodules https://github.com/valhalla/valhalla.git
       - name: Configure
-        run: cmake -B build -DCMAKE_BUILD_TYPE=Release
+        run: | 
+          cd valhalla
+          cmake -B build -DCMAKE_BUILD_TYPE=Release
       - name: Build
-        run: cmake --build build --target install --config release
+        run: cmake --build valhalla/build --target install --config release
       - name: Upload Artifacts
         uses: actions/upload-artifact@v3
         with:
