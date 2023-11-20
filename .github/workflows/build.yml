@@ -26,8 +26,22 @@ jobs:
     name: Build Tools for Windows
     runs-on: windows-latest
     steps:
-       - name: Install Deps
-         run: vcpkg.exe
+      - name: Clone
+        run: git clone --recurse-submodules https://github.com/valhalla/valhalla.git
+      - name: Install Deps
+        run: | 
+           cd valhalla
+           vcpkg.exe install
+      - name: Configure
+        run: cmake --build valhalla/build --target install --config release
+      - name: Build
+        run: cmake --build valhalla/build --target install --config release
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: ValhallaWin
+          path: build\release\*
+
       
         
         
