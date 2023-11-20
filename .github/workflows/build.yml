@@ -27,7 +27,7 @@ jobs:
     runs-on: windows-latest
     steps:
        - name: Install Deps
-       - run: vcpkg.exe
+         run: vcpkg.exe
       
         
         
