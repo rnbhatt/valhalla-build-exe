@@ -33,7 +33,9 @@ jobs:
            cd valhalla
            vcpkg.exe install
       - name: Configure
-        run: cmake --build valhalla/build --target install --config release
+        run: |
+          cd valhalla
+          cmake -B build -DCMAKE_BUILD_TYPE=Release
       - name: Build
         run: cmake --build valhalla/build --target install --config release
       - name: Upload Artifacts
